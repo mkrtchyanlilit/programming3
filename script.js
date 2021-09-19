@@ -80,10 +80,6 @@ function createObjects() {
         var newColorChanger = new ColorChanger(x, y, 5);
         colorChangerArr.push(newColorChanger);
       }
-      // else if (matrix[y][x] == 5) {
-      //   var newColorChanger = new ColorChanger(x, y, 6);
-      //   colorChangerArr.push(newColorChanger);
-      // }
     }
   }
 }

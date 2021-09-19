@@ -1,11 +1,8 @@
-class Predator {
-  constructor(x, y, id) {
-    this.x = x;
-    this.y = y;
-    this.id = id;
+class Predator extends Grass{
+  constructor(x, y, index){
+    super(x, y, index);
     this.energy = 8;
-    this.getNewCoordinates();
-  }
+}
 
   getNewCoordinates() {
     this.directions = [
@@ -22,21 +19,10 @@ class Predator {
 
   chooseCell(character) {
     this.getNewCoordinates();
-    var found = [];
-    for (var i in this.directions) {
-      var x = this.directions[i][0];
-      var y = this.directions[i][1];
-      if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-        if (matrix[y][x] == character) {
-          found.push(this.directions[i]);
-        }
-      }
-    }
-    return found;
+    return super.chooseCell(character);
   }
 
   //MUL
-
   mul() {
     var emptyCells = this.chooseCell(0);
     var newCell = random(emptyCells);
@@ -55,7 +41,6 @@ class Predator {
   }
 
   //MOVE
-
   move() {
     var emptyCells = this.chooseCell(0);
     var newCell = random(emptyCells);
@@ -76,7 +61,6 @@ class Predator {
   }
 
   //EAT
-
   eat() { 
     var emptyCellsGrassEater = this.chooseCell(2);
     var emptyCellsMultyplayer = this.chooseCell(4);
@@ -106,8 +90,6 @@ class Predator {
         }
       }
 
-     
-
       this.energy++;
       this.mul();
     } else {
@@ -116,7 +98,6 @@ class Predator {
   }
 
   //DIE
-
   die() {
     if (this.energy <= 0) {
       matrix[this.y][this.x] = 0;
