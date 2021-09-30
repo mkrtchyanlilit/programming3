@@ -1,31 +1,17 @@
-class Predator extends Grass{
+const LivingCreature = require("./LivingCreature");
+
+module.exports = class Predator extends LivingCreature{
   constructor(x, y, index){
     super(x, y, index);
     this.energy = 8;
 }
 
-  getNewCoordinates() {
-    this.directions = [
-      [this.x - 1, this.y - 1],
-      [this.x, this.y - 1],
-      [this.x + 1, this.y - 1],
-      [this.x - 1, this.y],
-      [this.x + 1, this.y],
-      [this.x - 1, this.y + 1],
-      [this.x, this.y + 1],
-      [this.x + 1, this.y + 1],
-    ];
-  }
 
-  chooseCell(character) {
-    this.getNewCoordinates();
-    return super.chooseCell(character);
-  }
 
   //MUL
   mul() {
-    var emptyCells = this.chooseCell(0);
-    var newCell = random(emptyCells);
+		var emptyCells = super.chooseCell(0);
+		var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
 
     if (this.energy > 12 && newCell) {
       var newX = newCell[0];
@@ -42,8 +28,8 @@ class Predator extends Grass{
 
   //MOVE
   move() {
-    var emptyCells = this.chooseCell(0);
-    var newCell = random(emptyCells);
+    var emptyCells = super.chooseCell(0);
+		var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
 
     if (this.energy > 0 && newCell) {
       var newX = newCell[0];
@@ -62,10 +48,10 @@ class Predator extends Grass{
 
   //EAT
   eat() { 
-    var emptyCellsGrassEater = this.chooseCell(2);
-    var emptyCellsMultyplayer = this.chooseCell(4);
+    var emptyCellsGrassEater = super.chooseCell(2);
+    var emptyCellsMultyplayer = super.chooseCell(4);
     var emptyCells = emptyCellsGrassEater.concat(emptyCellsMultyplayer);
-    var newCell = random(emptyCells);
+    var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
 
     if (this.energy > 0 && newCell) {
       var newX = newCell[0];

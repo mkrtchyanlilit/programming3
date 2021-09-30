@@ -1,31 +1,17 @@
-class Multyplayer extends Grass {
+const LivingCreature = require("./LivingCreature");
+
+module.exports = class Multyplayer extends LivingCreature {
   constructor(x, y, index){
     super(x, y, index);
     this.energy = 8;
 }
 
-  getNewCoordinates() {
-    this.directions = [
-      [this.x - 1, this.y - 1],
-      [this.x, this.y - 1],
-      [this.x + 1, this.y - 1],
-      [this.x - 1, this.y],
-      [this.x + 1, this.y],
-      [this.x - 1, this.y + 1],
-      [this.x, this.y + 1],
-      [this.x + 1, this.y + 1],
-    ];
-  }
-
-  chooseCell(character) {
-    this.getNewCoordinates();
-    return super.chooseCell(character);
-  }
 
   //MUL
   mul() {
-    var emptyCells = this.chooseCell(0);
-    var newCell = random(emptyCells);
+
+    var emptyCells = super.chooseCell(0);
+		var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
 
     if (newCell) {
       var newX = newCell[0];
@@ -42,8 +28,9 @@ class Multyplayer extends Grass {
 
   //MOVE
   move() {
-    var emptyCells = this.chooseCell(0);
-    var newCell = random(emptyCells);
+
+    var emptyCells = super.chooseCell(0);
+		var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
 
     if (this.energy > 0 && newCell) {
       var newX = newCell[0];
@@ -62,8 +49,8 @@ class Multyplayer extends Grass {
 
   //EAT
   eat() {
-    var emptyCells = this.chooseCell(1);
-    var newCell = random(emptyCells);
+    var grassCells = super.chooseCell(1);
+		var newCell = grassCells[Math.floor(Math.random() * grassCells.length)]
 
     if (this.energy > 0 && newCell) {
       var newX = newCell[0];
