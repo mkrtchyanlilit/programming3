@@ -169,7 +169,7 @@ function rand(min, max) {
 for (let i = 0; i < n; i++) {
     matrix[i] = [];
     for (let j = 0; j < n; j++) {
-        matrix[i][j] = Math.floor(rand(0, 3))
+        matrix[i][j] = Math.floor(rand(0, 6))
         
     }  
 }
@@ -225,7 +225,7 @@ function game() {
     io.sockets.emit("send matrix", matrix);
 }
 
-setInterval(game, 1000)
+setInterval(game, 5000)
 
 
 function kill() {
@@ -263,23 +263,7 @@ function addGrassEater() {
   io.sockets.emit("send matrix", matrix);
 }
 
-
-function addPredator() {
-  for (var i = 0; i < 7; i++) {   
-  var x = Math.floor(Math.random() * matrix[0].length)
-  var y = Math.floor(Math.random() * matrix.length)
-      if (matrix[y][x] == 0) {
-          matrix[y][x] = 3
-          predatorArr.push(new Predator(x, y, 3))
-      }
-  }
-  io.sockets.emit("send matrix", matrix);
-}
-
-
-
 ///new
-
 
 
 function weather() {
@@ -307,7 +291,6 @@ io.on('connection', function (socket) {
   socket.on("kill", kill);
     socket.on("add grass", addGrass);
   socket.on("add grassEater", addGrassEater);
-  socket.on("add predator", addPredator);
 });
 
 

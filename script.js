@@ -96,15 +96,15 @@ function nkarel(matrix) {
           var obj = matrix[y][x];
         if (obj == 1) {
             fill("green")
-          //     if(weath == "summer") {
-          //     fill("green");
-          // }else if (weath == "autumn") {
-          //     fill("#333300");
-          // }else if (weath == "winter") {
-          //     fill("white");
-          // }else if (weath == "spring") {
-          //     fill("#4dffa6");
-          // }
+              if(weath == "summer") {
+              fill("green");
+          }else if (weath == "autumn") {
+              fill("#333300");
+          }else if (weath == "winter") {
+              fill("white");
+          }else if (weath == "spring") {
+              fill("#4dffa6");
+          }
       }else if (obj == 2) {
               fill("yellow");
           }
@@ -142,8 +142,5 @@ function addGrassEater() {
 }
 
 
-function addPredator() {
-  socket.emit("add predator")
-}
 
 
