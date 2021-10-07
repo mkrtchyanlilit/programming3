@@ -1,32 +1,43 @@
 const LivingCreature = require("./LivingCreature");
 
 module.exports = class ColorChanger extends LivingCreature{
-  constructor(x, y, index){
-    super(x, y, index);
-    this.energy = 8;
-}
+  constructor(x, y, index) {
+		super(x, y, index);
+		this.energy = 8
+	}
   
-
   
     //MUL
+  
     mul() {
       var emptyCells = super.chooseCell(0);
-      var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
+		var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
   
       if (this.energy > 12 && newCell) {
+        colorChangerHashiv++;
         var newX = newCell[0];
         var newY = newCell[1];
   
-        matrix[newY][newX] = this.id;
+        matrix[newY][newX] = 5;
   
-        var newColorChanger = new ColorChanger(newX, newY, this.id);
+        var newColorChanger = new ColorChanger(newX, newY, 5);
         colorChangerArr.push(newColorChanger);
 
-        this.energy = 8;
+        this.energy = 10;
+      }
+
+      if (weath == "winter") {
+        this.energy -= 2;
+        this.multiply -= 4;
+      }
+      if (weath == "summer") {
+        this.energy += 2;
+        this.multiply += 3;   
       }
     }
   
     //MOVE
+  
     move() {
       var emptyCells = super.chooseCell(0);
       var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
@@ -34,27 +45,30 @@ module.exports = class ColorChanger extends LivingCreature{
       if (this.energy > 0 && newCell) {
         var newX = newCell[0];
         var newY = newCell[1];
-        matrix[newY][newX] = this.id;
+        matrix[newY][newX] = matrix[this.y][this.x];
         matrix[this.y][this.x] = 0;
   
         this.x = newX;
         this.y = newY;
   
-        this.energy--;
+        
       }
-  
-      this.die();
+      this.energy--;
+      if (this.energy <= 0) {
+        this.die();
+      }
     }
   
     //EAT
+  
     eat() {
-      var emptyCells = super.chooseCell(3);
-      var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
+      var predatorCells = super.chooseCell(3);
+		var newCell = predatorCells[Math.floor(Math.random() * predatorCells.length)]
   
       if (this.energy > 0 && newCell) {
         var newX = newCell[0];
         var newY = newCell[1];
-        matrix[newY][newX] = this.id;
+        matrix[newY][newX] = matrix[this.y][this.x];
         matrix[this.y][this.x] = 0;
   
         this.x = newX;
@@ -78,13 +92,17 @@ module.exports = class ColorChanger extends LivingCreature{
             matrix[newY][newX] = 5;
         }
 
-        this.mul();
+        if (this.energy >= 12) {
+          this.mul();
+          this.energy = 8
+        }
       } else {
         this.move();
       }
     }
   
     //DIE
+  
     die() {
       if (this.energy <= 0) {
         matrix[this.y][this.x] = 0;

@@ -3,13 +3,71 @@
   <head>
     <title></title>
     <meta charset="utf8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+    <style>
+      .weathers{
+        overflow: hidden;
+        list-style: none;
+        
+      }
+      .weathers li{
+      padding-right: 15px;
+        float: left;
+      }
+
+      .weather{
+        font-size: 20px;
+        padding: 8px;
+        cursor: pointer;
+        user-select: none;
+      }
+      .spring:hover{
+        background-color: chartreuse;
+        font-weight: 600;
+        color: white;
+      }
+      .summer:hover{
+        background-color: green;
+        font-weight: 600;
+        color: white;
+      }
+      .autumn:hover{
+        background-color: #333300;
+        font-weight: 600;
+        color: white;
+      }
+      .winter:hover{
+        background-color: white;
+        font-weight: 600;
+      }
+    </style>
   </head>
 
   <body>
     <div class="tools">
-      <h1 style="color:yellowgreen">Events</h1>
-      <ul>
+      <h1 style="color:cadetblue; padding-left: 40px;">WEATHERS</h1>
+      <ul class="weathers">
+        
           <li>
+            <button type="button" class="weather spring" onclick="spring()">Spring</button>
+        </li>
+        <li>
+            <button type="button" class="weather summer" onclick="summer()">Summer</button>
+        </li>
+        <li>
+          <button type="button" class="weather autumn" onclick="autumn()">Autumn</button>
+          </li>
+      <li>
+        <button type="button" class="weather winter" onclick="winter()">Winter</button>
+    </li>
+      </ul>
+
+      <h1 style="color:cadetblue; padding-left: 40px;">Events</h1>
+  <ul class="events">
+
+      <li>
               <button onclick="kill()">Kill them all</button>
           </li>
           <li>
@@ -18,13 +76,70 @@
           <li>
               <button onclick="addGrassEater()">Add grass eater</button>
           </li>
-      </ul>
-
+          <li>
+            <button onclick="water()">Water</button>
+        </li>
+        
+  </ul>
   </div>
 
 
+  
+
+  <table class="table table-hover">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Գույն</th>
+      <th scope="col">Նկարագրություն</th>
+      <th scope="col">Ծնվել է</th>
+  </tr>
+    <tr>
+      <th scope="row">1</th>
+      <td scope="row" style="background-color:green;"></td>
+      <td>Կանաչը խոտն է, որը բազմանում է N ցիկլը մեկ,մահանում է երբ նրան ուտում է խոտակերը</td>
+      <td id="grassCount"></td>
+  </tr>
+  <tr>
+    <th scope="row">2</th>
+    <td scope="row" style="background-color:yellow;"></td>
+    <td>Դեղինը խոտակերն է, որը բազմանում է N հատ խոտ ուտելուց հետո և մահանում է N հատ չուտելուց հետո, կամ
+        երբ նրան ուտում է գիշատիչը:</td>
+    <td id="grassEaterCount"></td>
+</tr>
+<tr>
+  <th scope="row">3</th>
+  <td scope="row" style="background-color:red;"></td>
+  <td>Կարմիրը գիշատիչն է, որը բազմանում է N հատ խոտակեր ուտելուց հետո և մահանում է N հատ չուտելուց հետո:</td>
+  <td id="predatorCount"></td>
+</tr>
+<tr>
+  <th scope="row">4</th>
+  <td scope="row" style="background-color:blue"></td>
+  <td>Կապույտը բազմացողն է, որը բազմանում է երկուսով՝ խոտ ուտելուց հետո և մահանում է N հատ չուտելուց հետո, կամ
+    երբ նրան ուտում է գիշատիչը:</td>
+  <td id="multyplayerCount"></td>
+</tr>
+<tr>
+  <th scope="row">5</th>
+  <td scope="row" style="background-color:orange"></td>
+  <td>Նարնջագույնը գույնը փոխողն է, որը իր գույնը փոխում է և դառնում մանշակագույն խոտակերին ուտելուց հետո և մահանում է N հատ չուտելուց հետո, կամ
+    երբ նրան ուտում է գիշատիչը:</td>
+  <td id="colorChangerCount"></td>
+</tr>
+<tr>
+  <th scope="row">6</th>
+  <td scope="row" style="background-color:aqua"></td>
+  <td>Ջուր՝ իրադարձություն, որը սպանում է բոլոր կերպարներին, բացի խոտից։</td>
+</tr>
+<!-- <tr>
+  <th scope="row">7</th>
+  <td scope="row" style="background-color:rgba(255, 179, 65, 0.479)"></td>
+  <td>Կրակ՝ իրադարձություն, որը այրում է բոլոր կերպարներին։</td>
+</tr> -->
+  </table>
+
     <script src="/socket.io/socket.io.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
+    <script src="p5.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
