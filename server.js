@@ -16,6 +16,7 @@ predatorArr = [];
 multyplayerArr = [];
 colorChangerArr = [];
 waterArr = [];
+fireArr = [];
 grassHashiv = 0;
 grassEaterHashiv = 0;
 predatorHashiv = 0;
@@ -28,6 +29,7 @@ var n = 50;
 weath = "summer";
 Grass = require("./classes/Grass")
 Water = require("./classes/Water")
+Fire = require("./classes/Fire")
 GrassEater = require("./classes/GrassEater")
 Predator = require("./classes/Predator")
 ColorChanger = require("./classes/ColorChanger")
@@ -39,7 +41,7 @@ function rand(min, max) {
 for (let i = 0; i < n; i++) {
     matrix[i] = [];
     for (let j = 0; j < n; j++) {
-        matrix[i][j] = Math.floor(rand(0, 8))
+        matrix[i][j] = Math.floor(rand(0, 6))
 
     }
 }
@@ -76,8 +78,12 @@ function createObject() {
                 colorChangerHashiv++;
             }
             else if (matrix[y][x] == 7) {
-                matrix[y][x] = 5
+                matrix[y][x] = 7
                 waterArr.push(new Water(x, y, 7))
+            }
+            else if (matrix[y][x] == 8) {
+                matrix[y][x] = 8
+                fireArr.push(new Fire(x, y, 8))
             }
         }
     }
@@ -116,13 +122,20 @@ function game() {
         
           }
     }
-    
+
     if (waterArr[0] !== undefined) {
         for (var i in waterArr) {
             waterArr[i].mul();
         
           }
       }
+      if (fireArr[0] !== undefined) {
+        for (var i in fireArr) {
+            fireArr[i].kill();
+        
+          }
+      }
+    
       
       let sendData = {
         matrix: matrix,
@@ -146,6 +159,8 @@ function kill() {
     predatorArr = [];
     multyplayerArr = [];
     colorChangerArr = [];
+    fireArr = [];
+    waterArr = [];
     
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
@@ -156,14 +171,25 @@ function kill() {
 }
 
 function water() {
-    grassEaterArr = [];
-    predatorArr = [];
-    multyplayerArr = [];
-    colorChangerArr = [];
-    
-    for (var y = 0; y < matrix.length; y++) {
-        for (var x = 0; x < matrix[y].length; x++) {
-            matrix[y][x] = 0;
+    for (var i = 0; i < 4; i++) {
+        var x = Math.floor(Math.random() * matrix[0].length)
+        var y = Math.floor(Math.random() * matrix.length)
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 7
+            var wt = new Water(x, y, 7)
+            waterArr.push(wt)
+        }
+    }
+}
+
+function fire() {
+    for (var i = 0; i < 4; i++) {
+        var x = Math.floor(Math.random() * matrix[0].length)
+        var y = Math.floor(Math.random() * matrix.length)
+        if (matrix[y][x] == 0) {
+            matrix[y][x] = 8
+            var fr = new Fire(x, y, 8)
+            waterArr.push(fr)
         }
     }
 }
@@ -198,6 +224,7 @@ io.on('connection', function (socket) {
     socket.on("add grass", addGrass);
     socket.on("add grassEater", addGrassEater);
     socket.on("water", water);
+    socket.on("fire", fire);
 });
 
 

@@ -7,17 +7,17 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     
     <style>
-      .weathers{
+      .weathers , .events{
         overflow: hidden;
         list-style: none;
         
       }
-      .weathers li{
+      .weathers li , .events li{
       padding-right: 15px;
         float: left;
       }
 
-      .weather{
+      .weather , .event{
         font-size: 20px;
         padding: 8px;
         cursor: pointer;
@@ -46,47 +46,7 @@
   </head>
 
   <body>
-    <div class="tools">
-      <h1 style="color:cadetblue; padding-left: 40px;">WEATHERS</h1>
-      <ul class="weathers">
-        
-          <li>
-            <button type="button" class="weather spring" onclick="spring()">Spring</button>
-        </li>
-        <li>
-            <button type="button" class="weather summer" onclick="summer()">Summer</button>
-        </li>
-        <li>
-          <button type="button" class="weather autumn" onclick="autumn()">Autumn</button>
-          </li>
-      <li>
-        <button type="button" class="weather winter" onclick="winter()">Winter</button>
-    </li>
-      </ul>
-
-      <h1 style="color:cadetblue; padding-left: 40px;">Events</h1>
-  <ul class="events">
-
-      <li>
-              <button onclick="kill()">Kill them all</button>
-          </li>
-          <li>
-              <button onclick="addGrass()">Add grass</button>
-          </li>
-          <li>
-              <button onclick="addGrassEater()">Add grass eater</button>
-          </li>
-          <li>
-            <button onclick="water()">Water</button>
-        </li>
-        
-  </ul>
-  </div>
-
-
-  
-
-  <table class="table table-hover">
+    <table class="table table-hover">
     <tr>
       <th scope="col">#</th>
       <th scope="col">Գույն</th>
@@ -131,12 +91,56 @@
   <td scope="row" style="background-color:aqua"></td>
   <td>Ջուր՝ իրադարձություն, որը սպանում է բոլոր կերպարներին, բացի խոտից։</td>
 </tr>
-<!-- <tr>
+<tr>
   <th scope="row">7</th>
-  <td scope="row" style="background-color:rgba(255, 179, 65, 0.479)"></td>
-  <td>Կրակ՝ իրադարձություն, որը այրում է բոլոր կերպարներին։</td>
-</tr> -->
+  <td scope="row" style="background-color:#000000"></td>
+  <td>Կրակ՝ իրադարձություն, որն այրում է բոլոր կերպարներին։</td>
+</tr>
   </table>
+    <div class="tools">
+      <h1 style="color:cadetblue; padding-left: 40px;">WEATHERS</h1>
+      <ul class="weathers">
+        
+          <li>
+            <button type="button" class="weather spring" onclick="spring()">Spring</button>
+        </li>
+        <li>
+            <button type="button" class="weather summer" onclick="summer()">Summer</button>
+        </li>
+        <li>
+          <button type="button" class="weather autumn" onclick="autumn()">Autumn</button>
+          </li>
+      <li>
+        <button type="button" class="weather winter" onclick="winter()">Winter</button>
+    </li>
+      </ul>
+
+      <h1 style="color:cadetblue; padding-left: 40px;">Events</h1>
+  <ul class="events">
+
+      <li>
+              <button class="event" onclick="kill()">Kill them all</button>
+          </li>
+          <li>
+              <button class="event" onclick="addGrass()">Add grass</button>
+          </li>
+          <li>
+              <button class="event" onclick="addGrassEater()">Add grass eater</button>
+          </li>
+          <li>
+            <button class="event" onclick="water()">Water</button>
+        </li>
+        <li>
+          <button class="event" onclick="fire()">Fire</button>
+      </li>
+        
+  </ul>
+  </div>
+
+
+  
+
+  
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="p5.js"></script>

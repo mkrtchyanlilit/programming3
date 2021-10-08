@@ -50,7 +50,10 @@ function setup() {
           fill("purple");
         } else if (obj == 7) {
           fill("aqua");
-        } else {
+        }
+        else if (obj == 8) {
+          fill("black");
+        }else {
           fill("#acacac");
         }
 
@@ -74,9 +77,8 @@ function addGrassEater() {
 function water() {
   socket.emit("water");
 }
-
-function watfireer() {
-  socket.emit("water");
+function fire() {
+  socket.emit("fire");
 }
 
 function winter() {
